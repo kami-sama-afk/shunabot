@@ -1028,7 +1028,13 @@ Velocidade do Vento: ${wind_speedy.split('"')[1]}\n\n\t_${date.split('"')[1]} à
 					boij = JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo
 					delb = await client.downloadAndSaveMediaMessage(boij)
 					setiker.push(`${svst}`)
-					fs.writeFileSync(`./strg/sticker/${svst}.webp`, delb)
+					await sleep(1000)
+					const img = await fs.readFileSync(`./${delb}`)
+					const base = img.toString('base64')
+					fs.writeFileSync(`./strg/sticker/${svst}.webp`, base, {encoding: 'base64'},function(err){
+						if(err){
+						  console.log(err)
+						}})
 					fs.writeFileSync('./strg/stik.json', JSON.stringify(setiker))
 					client.sendMessage(from, `Sticker adicionado ✅\nVerifique por ${prefix}liststicker`, MessageType.text, { quoted: mek })
 					break
