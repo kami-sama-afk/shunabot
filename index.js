@@ -294,9 +294,9 @@ async function starts() {
 					reply(mess.wait)
 						encmedia = isQuotedAudio ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
 						media = await client.downloadMediaMessage(encmedia)
-						await fs.writeFile('./audio.mp3', media, (err) => {
-							ran = './nightcore.mp3'
-							ffmpeg('audio.mp3')
+						await fs.writeFile('./bass.mp3', media, (err, ranp) => {
+							ran = getRandom('.mp3')
+							ffmpeg('bass.mp3')
 							.audioFilter(`equalizer=f=40:width_type=h:width=50:g=${args[0]}`)
 							.format('mp3')
 							.on('start', function (cmd) {
@@ -304,14 +304,14 @@ async function starts() {
 							})
 							.on('error', function (err) {
 								console.log(`Error : ${err}`)
-								fs.unlinkSync('./audio.mp3')
+								fs.unlinkSync('./bass.mp3')
 								reply(mess.error.fail)
 							})
 							.on('end', function () {
 								console.log('Finish')
 								buffer = fs.readFileSync(ran)
 								client.sendMessage(from, buffer, audio, { mimetype: 'audio/mp4', quoted: mek})
-								fs.unlinkSync('./audio.mp3')
+								fs.unlinkSync('./bass.mp3')
 								fs.unlinkSync(ran)
 							}, 3000)
 							.save(ran)
@@ -322,9 +322,9 @@ async function starts() {
 					reply(mess.wait)
 						encmedia = isQuotedAudio ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
 						media = await client.downloadMediaMessage(encmedia)
-						await fs.writeFile('./audio.mp3', media, (err) => {
-							ran = './nightcore.mp3'
-							ffmpeg('audio.mp3')
+						await fs.writeFile('./nightcore.mp3', media, (err, ranp) => {
+							ran = getRandom('.mp3')
+							ffmpeg('nightcore.mp3')
 							.audioFilter('asetrate=44100*1.25')
 							.format('mp3')
 							.on('start', function (cmd) {
@@ -332,14 +332,14 @@ async function starts() {
 							})
 							.on('error', function (err) {
 								console.log(`Error : ${err}`)
-								fs.unlinkSync('./audio.mp3')
+								fs.unlinkSync('./nightcore.mp3')
 								reply(mess.error.fail)
 							})
 							.on('end', function () {
 								console.log('Finish')
 								buffer = fs.readFileSync(ran)
 								client.sendMessage(from, buffer, audio, { mimetype: 'audio/mp4', quoted: mek})
-								fs.unlinkSync('./audio.mp3')
+								fs.unlinkSync('./nightcore.mp3')
 								fs.unlinkSync(ran)
 							}, 3000)
 							.save(ran)
