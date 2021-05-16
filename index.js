@@ -1116,7 +1116,7 @@ Velocidade do Vento: ${wind_speedy.split('"')[1]}\n\n\t_${date.split('"')[1]} à
 				case 'getaud':
 					namastc = body.slice(8)
 					buffer = fs.readFileSync(`./strg/audio/${namastc}.mp3`)
-					client.sendMessage(from, buffer, audio, { mimetype: 'audio/mp4', quoted: mek, ptt: true })
+					client.sendMessage(from, buffer, audio, { mimetype: 'audio/mp4', quoted: mek })
 					break
 				case 'listaud':
 				case 'audlist':
