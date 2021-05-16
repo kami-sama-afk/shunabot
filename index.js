@@ -1630,14 +1630,6 @@ Velocidade do Vento: ${wind_speedy.split('"')[1]}\n\n\t_${date.split('"')[1]} à
 					media = await client.downloadAndSaveMediaMessage(encmedia)
 					ran = getRandom('.png')
 					await ffmpeg(media)
-						//.input(media)
-						.outputOptions([
-							`-vf`,
-							`scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`
-						])
-						//.outputOptions('-f image2pipe')
-   						//.outputOptions('-vcodec png')
-						//.toFormat('png')
 						.on('start', function (cmd) {
 							console.log(`Started : ${cmd}`)
 						})
@@ -1653,7 +1645,7 @@ Velocidade do Vento: ${wind_speedy.split('"')[1]}\n\n\t_${date.split('"')[1]} à
 							fs.unlinkSync(ran)
 						})
 						.save(ran)
-					break
+						break
 					case 'tomp3':
 						if(isQuotedVideo || content.includes('videoMessage') ){
 							reply(mess.wait)
