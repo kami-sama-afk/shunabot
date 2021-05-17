@@ -1421,7 +1421,7 @@ Velocidade do Vento: ${wind_speedy.split('"')[1]}\n\n\t_${date.split('"')[1]} à
 					if (!isGroup) return reply(mess.only.group)
 					if (!isGroupAdmins) return reply(mess.only.admin)
 					teks = (args.length >= 1) ? body.slice(9).trim() : ''
-                	group = await client.groupMetadata(from);
+                	const group = await client.groupMetadata(from);
             	    member = group['participants']
         	        jids = [];
 	                member.map( async adm => { jids.push(adm.id.replace('c.us', 's.whatsapp.net')) })
